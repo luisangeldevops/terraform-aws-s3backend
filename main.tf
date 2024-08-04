@@ -10,7 +10,7 @@ locals {
   namespace = substr(join("-", [var.namespace, random_string.rand.result]), 0, 24)
 }
 
-resource "aws_resourcesgroups_group" "resourcegroups_group" {
+resource "aws_resourcegroups_group" "resourcegroups_group" {
   name = "${local.namespace}-group"
 
   resource_query {
@@ -58,13 +58,13 @@ resource "aws_s3_bucket" "s3_bucket" {
   }
 }
 
-resource "aws_s3_bucket_public_acces_block" "s3_bucket" {
+resource "aws_s3_bucket_public_access_block" "s3_bucket" {
   bucket = aws_s3_bucket.s3_bucket.id
 
-  block_public_acls      = true
-  block_public_policy    = true
-  ignore_public_acls     = true
-  restric_public_buckets = true
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_dynamodb_table" "dynamodb_table" {
